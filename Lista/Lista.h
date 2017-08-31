@@ -64,7 +64,7 @@ Lista<T>::Lista(const Lista<T> &li) {}
  */
 template<class T>
 Lista<T>::~Lista() {
-
+  vaciar();
 }
 
 
@@ -74,7 +74,18 @@ Lista<T>::~Lista() {
  * @return true si la lista esta vacia, sino false
  */
 template<class T>
-bool Lista<T>::esVacia() {
+b
+    Nodo<T> *aux = inicio;
+    Nodo<T> *ant
+    
+    
+    while(aux != NULL){
+      ant=aux;
+      aux = aux->getNext();
+      delete ant;
+    }
+    inicio=NULL;
+  ool Lista<T>::esVacia() {
   return inicio == NULL;
 }
 
@@ -184,7 +195,31 @@ void Lista<T>::remover(int pos) {
  * @return dato almacenado en el nodo
  */
 template<class T>
-T Lista<T>::getDato(int pos) {}
+T Lista<T>::getDato(int pos) {
+  
+    Nodo<T> *aux = inicio;
+    Nodo<T> *ant
+    
+    
+    while(aux != NULL){
+      ant=aux;
+      aux = aux->getNext();
+      delete ant;
+    }
+    inicio=NULL;
+  
+    unsigned int i = 0;
+    Nodo<T> *aux = inicio;
+    
+    while(i < pos && aux != NULL){
+      aux = aux->getNext();
+      i++;
+    }
+    if (aux == NULL)
+      throw 5;
+    
+    return aux->getDato();
+}
 
 
 /**
@@ -194,7 +229,20 @@ T Lista<T>::getDato(int pos) {}
  * @param dato nuevo dato a almacenar
  */
 template<class T>
-void Lista<T>::reemplazar(int pos, T dato) {}
+void Lista<T>::reemplazar(int pos, T dato) {
+    
+    unsigned int i = 0;
+    Nodo<T> *aux = inicio;
+    
+    while(i < pos && aux != NULL){
+      aux = aux->getNext();
+      i++;
+    }
+    if (aux == NULL)
+      throw 5;
+    
+    aux->setDato();
+}
 
 
 /**
@@ -202,7 +250,20 @@ void Lista<T>::reemplazar(int pos, T dato) {}
  * @tparam T
  */
 template<class T>
-void Lista<T>::vaciar() {}
+void Lista<T>::vaciar() {
+  
+    Nodo<T> *aux = inicio;
+    Nodo<T> *ant
+    
+    
+    while(aux != NULL){
+      ant=aux;
+      aux = aux->getNext();
+      delete ant;
+    }
+    inicio=NULL;
+  
+}
 
 
 #endif //LISTA_H
