@@ -35,6 +35,8 @@ public:
     void reemplazar(int pos, T dato);
 
     void vaciar();
+
+    void insertAfter2(T, int, T);
 };
 
 
@@ -108,7 +110,7 @@ template<class T>
 int Lista<T>::getTamanio() {
   Nodo<T> *aux = inicio;
   int cont=0;
-  
+
   while(aux != NULL){
     cont++;
     aux = aux->getNext();
@@ -127,7 +129,7 @@ template<class T>
 void Lista<T>::insertar(int pos, T dato) {
   int cont = 0;
   Nodo<T> *aux = inicio;
-  
+
   if(pos == 0){
     Nodo<T> *nn = new Nodo<T>(dato, inicio);
     inicio==nn;
@@ -137,10 +139,10 @@ void Lista<T>::insertar(int pos, T dato) {
     cont++;
     aux = aux->getNext();
   }
-  
+
   if(aux == NULL)
     throw 1;
-  
+
   Nodo<T> *nn = new Nodo<T>(dato, aux->getNext());
   aux->setNext(nn);
 }
@@ -187,23 +189,23 @@ template<class T>
 void Lista<T>::remover(int pos) {
   Nodo<T> *aux = inicio;
   int cont=0;
-  
+
   if(pos==0){
     if(inicio==NULL)
       throw 1;
-    
+
     inicio = inicio->getNext();
     delete[] aux;
     return;
   }
-  
+
   while(cont < pos-1 && aux != NULL){
     cont++;
     aux = aux->getNext();
   }
   if(aux->getNext() == NULL)
     throw 1;
-  
+
   Nodo<T> *tmp = aux->getNext();
   aux->setNext(tmp->getNext());
   delete[] tmp;
@@ -241,17 +243,17 @@ T Lista<T>::getDato(int pos) {
  */
 template<class T>
 void Lista<T>::reemplazar(int pos, T dato) {
-    
+
     unsigned int i = 0;
     Nodo<T> *aux = inicio;
-    
+
     while(i < pos && aux != NULL){
       aux = aux->getNext();
       i++;
     }
     if (aux == NULL)
       throw 5;
-    
+
     aux->setDato(dato);
 }
 
@@ -273,6 +275,28 @@ void Lista<T>::vaciar() {
     }
     inicio = NULL;
 }
-
+/**
+ * Función que inserta un nodo con el valor newValue después de la enésima ocurrencia de oldValue.
+ * @tparam T
+ * @param n cantidad de veces que debe ocurrir el valor oldValue
+ * @param oldValue valor elegido como referencia para n
+ * @param newValue valor del dato en el nodo a insertar
+ */
+template<class T>
+void Lista<T>::insertAfter2(T oldValue, int n, T newValue) {
+    int cont = 0;
+    Nodo<T> *aux = inicio;
+    while (NULL != aux) {
+        if (aux->getDato() == oldValue) {
+            cont++;
+            if (cont == n) {
+                cont = 0;
+                Nodo<T> *nuevoNodo = new Nodo<T>(newValue, aux->getNext());
+                aux->setNext(nuevoNodo);
+            }
+        }
+        aux = aux->getNext();
+    }
+}
 
 #endif //LISTA_H
