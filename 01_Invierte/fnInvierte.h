@@ -4,12 +4,20 @@
 
 
 template <class T>
-void fnInvierte (Lista<T> *lis);
+void invierte (Lista<T> *lis,Lista<T> *list){
+    if (list->esVacia())
+        return;
+    lis->insetarPrimero(list->getDato(0));
+    list->remover(0);
+    invierte(lis, list);
+}
 
 
 template <class T>
 void fnInvierte (Lista<T> *lis){
-
+    Lista<T> list(*lis);
+    lis->vaciar();
+    invierte(list, &list);
 }
 
 
